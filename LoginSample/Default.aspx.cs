@@ -16,7 +16,8 @@ namespace LoginSample
 
             //todo
             //GetArlyHeader as above
-            //GetTrineText as above
+            LabelArlyHeaderText.Text=dBLayer.GetArlyHeaderText();
+           
             //
 
         }

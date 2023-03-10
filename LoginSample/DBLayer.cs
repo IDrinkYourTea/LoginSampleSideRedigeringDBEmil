@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MongoDB.Driver.Core.Configuration;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
@@ -10,6 +11,7 @@ namespace LoginSample
 {
     public class DBLayer
     {
+
         public int GetUserCountByUserNameAndPassWord(string userName, string passWord)
         {
             var connectionString = ConfigurationManager.ConnectionStrings["xxxx"].ConnectionString;
@@ -62,6 +64,75 @@ namespace LoginSample
             }
         }
 
+        public void UpdateTrineText(string text)
+        {
+            SqlParameter param;
+            var connectionString = ConfigurationManager.ConnectionStrings["ConnCms"].ConnectionString;
+            DataTable dt = new DataTable();
+
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                conn.Open();
+
+                SqlCommand cmd = new SqlCommand("UPDATE TextTable set TrineText=@text where id=1", conn);
+                cmd.CommandType = CommandType.Text;
+
+                //params here
+                param = new SqlParameter("@text", SqlDbType.NVarChar);
+                param.Value = text;
+                cmd.Parameters.Add(param);
+
+                cmd.ExecuteReader();
+                conn.Close();
+            }
+        }
+
+        public void UpdateArlyHeader(string text)
+        {
+            SqlParameter param;
+            var connectionString = ConfigurationManager.ConnectionStrings["ConnCms"].ConnectionString;
+            DataTable dt = new DataTable();
+
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                conn.Open();
+
+                SqlCommand cmd = new SqlCommand("UPDATE TextTable set ArlyOverskrift=@text where id=1", conn);
+                cmd.CommandType = CommandType.Text;
+
+                //params here
+                param = new SqlParameter("@text", SqlDbType.NVarChar);
+                param.Value = text;
+                cmd.Parameters.Add(param);
+
+                cmd.ExecuteReader();
+                conn.Close();
+            }
+        }
+
+        public void UpdateTrineHeader(string text)
+        {
+            SqlParameter param;
+            var connectionString = ConfigurationManager.ConnectionStrings["ConnCms"].ConnectionString;
+            DataTable dt = new DataTable();
+
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                conn.Open();
+
+                SqlCommand cmd = new SqlCommand("UPDATE TextTable set TrineOverskrift=@text where id=1", conn);
+                cmd.CommandType = CommandType.Text;
+
+                //params here
+                param = new SqlParameter("@text", SqlDbType.NVarChar);
+                param.Value = text;
+                cmd.Parameters.Add(param);
+
+                cmd.ExecuteReader();
+                conn.Close();
+            }
+        }
+
         public string GetArlyText()
         {
             string text = "";
@@ -83,6 +154,111 @@ namespace LoginSample
 
                 conn.Close();
                 return text;
+            }
+        }
+
+        public string GetTrineText()
+        {
+            string text = "";
+            var connectionString = ConfigurationManager.ConnectionStrings["ConnCms"].ConnectionString;
+
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                conn.Open();
+
+                SqlCommand cmd = new SqlCommand("SELECT TrineText from TextTable where id=1", conn);
+                cmd.CommandType = CommandType.Text;
+
+                SqlDataReader reader = cmd.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    text = reader.GetString(0);
+                }
+
+                conn.Close();
+                return text;
+            }
+        }
+
+        public string GetArlyHeaderText()
+        {
+            string text = "";
+            var connectionString = ConfigurationManager.ConnectionStrings["ConnCms"].ConnectionString;
+
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                conn.Open();
+
+                SqlCommand cmd = new SqlCommand("SELECT ArlyOverskrift from TextTable where id=1", conn);
+                cmd.CommandType = CommandType.Text;
+
+                SqlDataReader reader = cmd.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    text = reader.GetString(0);
+                }
+
+                conn.Close();
+                return text;
+            }
+        }
+
+        public string GetTrineHeaderText()
+        {
+            string text = "";
+            var connectionString = ConfigurationManager.ConnectionStrings["ConnCms"].ConnectionString;
+
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                conn.Open();
+
+                SqlCommand cmd = new SqlCommand("SELECT TrineOverskrift from TextTable where id=1", conn);
+                cmd.CommandType = CommandType.Text;
+
+                SqlDataReader reader = cmd.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    text = reader.GetString(0);
+                }
+
+                conn.Close();
+                return text;
+            }
+        }
+
+        public int CheckAdmin(string username, string password)
+        {
+            SqlParameter param;
+            int count = 0;
+            var connectionString = ConfigurationManager.ConnectionStrings["ConnCms"].ConnectionString;
+
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                conn.Open();
+
+                SqlCommand cmd = new SqlCommand("SELECT * from UserSave where Username= @UN and Password= @PW", conn);
+                cmd.CommandType = CommandType.Text;
+
+                //params here
+                param = new SqlParameter("@UN", SqlDbType.NVarChar);
+                param.Value = username;
+                cmd.Parameters.Add(param);
+                //params here
+                param = new SqlParameter("@PW", SqlDbType.NVarChar);
+                param.Value = password;
+                cmd.Parameters.Add(param);
+
+                object value = cmd.ExecuteScalar();
+                if (value != null) 
+                    count = Convert.ToInt32(value);
+
+
+
+                conn.Close();
+                return count;
             }
         }
     }

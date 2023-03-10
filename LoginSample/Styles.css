@@ -32,6 +32,14 @@
         display: none;
     }
 
+.content {
+    width: 800px;
+    margin: auto;
+    width: 50%;
+  
+    padding: 10px;
+}
+
 @media screen and (max-width: 600px) {
     .topnav a:not(:first-child) {
         display: none;
@@ -60,3 +68,4 @@
             text-align: left;
         }
 }
+

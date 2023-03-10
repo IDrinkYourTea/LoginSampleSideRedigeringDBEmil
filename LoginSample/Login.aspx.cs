@@ -19,14 +19,18 @@ namespace LoginSample
 
         protected void ButtonLogin_Click(object sender, EventArgs e)
         {
-            if (txtUserPass.Value == "123")//use a database method here.
+            DBLayer dBLayer= new DBLayer();
+            int count=dBLayer.CheckAdmin(txtUserName.Value,txtUserPass.Value);
+
+
+            if (count == 1)
             {
-                
+
                 FormsAuthentication.RedirectFromLoginPage(txtUserName.Value, chkPersistCookie.Checked);
-                
+
             }
             else
-                Response.Redirect("login.aspx", true);//todo add errormessage to user if wrong
+                lblMsg.Text = "Incorrect login";
         }
     }
 }

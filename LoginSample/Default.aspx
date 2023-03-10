@@ -23,9 +23,9 @@
 </head>
 <body>
     <form id="form1" runat="server">
-        <div>
             <div class="topnav" id="myTopnav">
-                <a href="Default.aspx" class="active">Home</a>
+                <a href="Default.aspx" class="active">Arly</a>
+                <a href="Trine.aspx">Trine</a>
                 <a href="Restricted.aspx">Restricted</a>
                 <a href="Login.aspx">LoginPage</a>
                 
@@ -33,26 +33,22 @@
                 <i class="fa fa-bars"></i>
                 </a>
             </div>
-
-            <H1>
+        <div class="content">
+            <h1>
                 <asp:Label ID="LabelArlyHeaderText" runat="server" Text="ArlyHeader"></asp:Label>
-            </H1>
+            </h1>
             <p>
                 <asp:Label ID="LabelArlyTextFromDB" runat="server" Text="Label"></asp:Label>
             </p>
-            <p>
-                <asp:Label ID="LabelTrineTextFromDB" runat="server" Text="Trines text her..."></asp:Label>
-            </p>
-
-
+            
+        </div>
 
 
                         
            
-            <p>Menyen er hentet fra:<a href="https://www.w3schools.com/howto/howto_js_topnav_responsive.asp">https://www.w3schools.com/howto/howto_js_topnav_responsive.asp</a>
+            <h5 class="content">Menyen er hentet fra:<a href="https://www.w3schools.com/howto/howto_js_topnav_responsive.asp">https://www.w3schools.com/howto/howto_js_topnav_responsive.asp</a>
 
-            </p>
-        </div>
+            </h5>
     </form>
 </body>
 </html>

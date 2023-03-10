@@ -24,7 +24,8 @@
 <body>
     <form id="form1" runat="server">
         <div class="topnav" id="myTopnav">
-                <a href="Default.aspx" >Home</a>
+                <a href="Default.aspx" >Arly</a>
+                <a href="Trine.aspx">Trine</a>
                 <a href="Restricted.aspx">Restricted</a>
                 <a href="Login.aspx" class="active">LoginPage</a>
                 
@@ -57,7 +58,9 @@
                 <td></td>
             </tr>
         </table>
-                <asp:Button ID="ButtonLogin" runat="server" Text="Login" OnClick="ButtonLogin_Click" /><p></p>
+                <asp:Button ID="ButtonLogin" runat="server" Text="Login" OnClick="ButtonLogin_Click" /><p>
+            <asp:LoginStatus ID="LoginStatus1" runat="server" />
+        </p>
         <asp:Label id="lblMsg" ForeColor="red" Font-Name="Verdana" Font-Size="10" runat="server" />
     </form>
 </body>
